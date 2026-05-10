@@ -118,6 +118,7 @@ def cmd_compare(args: argparse.Namespace) -> None:
         for f in reference
         if f in actual and reference[f] != actual[f]
     }
+    extra = {f: s for f, s in actual.items() if f not in reference}
     ok_count = len(reference) - len(missing) - len(mismatched)
 
     output = os.path.abspath(args.output)
@@ -130,6 +131,7 @@ def cmd_compare(args: argparse.Namespace) -> None:
         f.write(f"# matched OK    : {ok_count}\n")
         f.write(f"# missing       : {len(missing)}\n")
         f.write(f"# size mismatch : {len(mismatched)}\n")
+        f.write(f"# extra in dest : {len(extra)}\n")
         f.write("\n")
 
         f.write("=" * 60 + "\n")
@@ -158,9 +160,20 @@ def cmd_compare(args: argparse.Namespace) -> None:
         else:
             f.write("  (none)\n")
 
+        f.write("\n")
+        f.write("=" * 60 + "\n")
+        f.write("EXTRA BAGS (in dest only)\n")
+        f.write("=" * 60 + "\n")
+        if extra:
+            for fname, size in sorted(extra.items()):
+                f.write(f"  {fname}  (size: {_human_size(size)} / {size} B)\n")
+        else:
+            f.write("  (none)\n")
+
     print(
         f"Compare result: {len(reference)} reference | "
-        f"{ok_count} OK | {len(missing)} missing | {len(mismatched)} size mismatch"
+        f"{ok_count} OK | {len(missing)} missing | {len(mismatched)} size mismatch | "
+        f"{len(extra)} extra in dest"
     )
     print(f"Report written -> {output}")
 

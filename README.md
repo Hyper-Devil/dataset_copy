@@ -72,6 +72,7 @@ python bag_tool.py compare --txt my_bags.txt --path /backup/bags --output report
 # matched OK    : 8
 # missing       : 1
 # size mismatch : 1
+# extra in dest : 1
 
 ============================================================
 MISSING BAGS
@@ -84,6 +85,11 @@ SIZE MISMATCH
   filename                                  expected            actual             delta
   ----------------------------------------  ----------------  ----------------  ----------------
   bar.bag                                      50.00 MB          48.50 MB         -1.50 MB
+
+============================================================
+EXTRA BAGS (in dest only)
+============================================================
+  extra.bag  (size: 200.00 MB / 209715200 B)
 ```
 
 ---
