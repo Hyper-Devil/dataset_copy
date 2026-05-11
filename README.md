@@ -32,9 +32,9 @@ python bag_tool.py export --path /data/bags --output my_bags.txt
 ```
 # exported: 2026-05-09 10:00:00
 # source: /data/bags
-# path	filename	size_bytes
-/data/bags/run1/foo.bag	foo.bag	104857600
-/data/bags/run2/bar.bag	bar.bag	52428800
+# path	filename	size_bytes	mtime
+/data/bags/run1/foo.bag	foo.bag	104857600	2026-05-01 08:30:00
+/data/bags/run2/bar.bag	bar.bag	52428800	2026-04-28 14:15:22
 ```
 
 ---
@@ -82,14 +82,14 @@ MISSING BAGS
 ============================================================
 SIZE MISMATCH
 ============================================================
-  filename                                  expected            actual             delta
-  ----------------------------------------  ----------------  ----------------  ----------------
-  bar.bag                                      50.00 MB          48.50 MB         -1.50 MB
+  filename                                  expected            actual             delta       mtime (dest)
+  ----------------------------------------  ----------------  ----------------  ----------------  -------------------
+  bar.bag                                      50.00 MB          48.50 MB         -1.50 MB  2026-04-30 09:12:05
 
 ============================================================
 EXTRA BAGS (in dest only)
 ============================================================
-  extra.bag  (size: 200.00 MB / 209715200 B)
+  extra.bag  (size: 200.00 MB / 209715200 B  mtime: 2026-05-08 17:00:43)
 ```
 
 ---
